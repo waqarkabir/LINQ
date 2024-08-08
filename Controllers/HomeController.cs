@@ -216,6 +216,29 @@ namespace LearningLINQWithSQL.Controllers
             ViewBag.SalaryGroupedByAge = model;
             return View();
         }
+
+        public IActionResult AVG()
+        {
+            var model = Context.Employees
+                .GroupBy(e => e.Age)
+                .Select(g => new
+                {
+                    Age = g.Key,
+                    AvgSalary = g.Average(e => e.Salary)
+                }).ToList();
+
+            var allEmployeesAgewise = Context.Employees
+             .Select(x => new
+             {
+                 x.FirstName,
+                 x.Age,
+                 x.Salary
+             }).ToList();
+            ViewBag.AllEmployeesAgewise = allEmployeesAgewise;
+
+            ViewBag.SalaryGroupedByAge = model;
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
