@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Employees";
+    var salaryGroupedByAge = ViewBag.SalaryGroupedByAge as IEnumerable<dynamic>; // Cast to IEnumerable<dynamic>
+}
+
+<h3>Sum of Salaries Grouped by Age</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Age</th>
+            <th>Total Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (salaryGroupedByAge != null && salaryGroupedByAge.Any())
+        {
+            @foreach (var group in salaryGroupedByAge)
+            {
+                <tr>
+                    <td>@group.Age</td>
+                    <td>@group.TotalSalary</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2">No data available</td>
+            </tr>
+        }
+    </tbody>
+</table>

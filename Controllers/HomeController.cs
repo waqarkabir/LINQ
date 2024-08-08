@@ -179,6 +179,19 @@ namespace LearningLINQWithSQL.Controllers
 
            return View();
         }
+
+        public IActionResult Sum()
+        {
+            var model = Context.Employees
+                .GroupBy(e => e.Age)
+                .Select(g => new
+                {
+                   Age = g.Key,
+                   TotalSalary = g.Sum(e => e.Salary)
+                }).ToList();
+            ViewBag.SalaryGroupedByAge = model;
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
