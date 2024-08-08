@@ -173,8 +173,23 @@ namespace LearningLINQWithSQL.Controllers
         {
             int totalEmployees = Context.Employees.Count();
             int employeesWithTaxableSalary = Context.Employees.Count(e => e.Salary > 50000);
-            
+            var employeeNamesWithTaxableSalary = Context.Employees
+                .Where(e => e.Salary > 50000)
+                .Select(e => new 
+                {
+                    e.FirstName,
+                    e.Salary
+                })
+                .ToList();
+            var allEmployeesWithSalaries = Context.Employees
+                .Select(x => new
+                { 
+                    x.FirstName,
+                    x.Salary
+                }).ToList();
             ViewBag.TotalEmployees = totalEmployees;
+            ViewBag.AllEmployeesWithSalaries = allEmployeesWithSalaries;
+            ViewBag.EmployeeNamesWithTaxableSalary = employeeNamesWithTaxableSalary;
             ViewBag.EmployeesWithTaxableSalary = employeesWithTaxableSalary;
 
            return View();
@@ -189,6 +204,15 @@ namespace LearningLINQWithSQL.Controllers
                    Age = g.Key,
                    TotalSalary = g.Sum(e => e.Salary)
                 }).ToList();
+
+            var allEmployeesAgewise= Context.Employees
+             .Select(x => new
+             {
+                 x.FirstName,
+                 x.Age
+             }).ToList();
+            ViewBag.AllEmployeesAgewise = allEmployeesAgewise;
+
             ViewBag.SalaryGroupedByAge = model;
             return View();
         }

@@ -1,6 +1,61 @@
 ﻿@{
     ViewBag.Title = "Count";
+    var allEmployeesWithSalaries = ViewBag.AllEmployeesWithSalaries as IEnumerable<dynamic>; // Cast to IEnumerable<dynamic>
+    var employeeNamesWithTaxableSalary = ViewBag.EmployeeNamesWithTaxableSalary as IEnumerable<dynamic>; // Cast to IEnumerable<dynamic>
 }
 
 <h2>Total Employees: @ViewBag.TotalEmployees</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (allEmployeesWithSalaries != null && allEmployeesWithSalaries.Any())
+        {
+            @foreach (var emp in allEmployeesWithSalaries)
+            {
+                <tr>
+                    <td>@emp.FirstName</td>
+                    <td>@emp.Salary</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2">No data available</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />
 <h2>Employees with Taxable Salary: @ViewBag.EmployeesWithTaxableSalary</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (employeeNamesWithTaxableSalary != null && employeeNamesWithTaxableSalary.Any())
+        {
+            @foreach (var emp in employeeNamesWithTaxableSalary)
+            {
+                <tr>
+                    <td>@emp.FirstName</td>
+                    <td>@emp.Salary</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2">No data available</td>
+            </tr>
+        }
+    </tbody>
+</table>
