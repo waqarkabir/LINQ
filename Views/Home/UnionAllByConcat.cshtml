@@ -1,0 +1,36 @@
+﻿@model IEnumerable<EmployeeSalaryViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Employee List</title>
+</head>
+<body>
+    <h1>Employee List</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Salary Group</th>
+                <th>Salary Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Age</td>
+                    <td>@item.SalaryGroup</td>
+                    <td>@item.Salary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
